@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile and Settings</title>
+    <link rel="icon" type="image/png" href="Images/logo.png">
+    <style>
+        *{
+            font-family: Optima;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: #fff;
+        }
+
+        .header-background {
+            background-color: #c4001dcc;
+            padding:80px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            z-index: 0;
+        }
+
+        .header-background h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+
+        #personalInfo {
+            position: relative;
+            z-index: 1;
+            background-color: #393636;
+            padding: 14px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: -130px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2d2d2d;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+     
+        .navbar .menu a {
+            text-decoration: none;
+            color: white;
+            font-size: 23px;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+     
+        .navbar .menu a:hover {
+            background-color: #c4001dcc;
+        }
+     
+        .navbar .profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 50px;
+        }
+     
+        .navbar .logo img {
+            width: 50px;
+            height: auto;
+        }
+
+        .container {
+            width: 80%;
+            margin-left:20em;
+            padding: 20px;
+            padding-top: 80px;
+            min-height: 80vh;
+        }
+
+        h2 {
+            color: white;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        .section {
+            background-color: #736b6b80;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 45em;
+            text-align: left;
+            margin-left: 5px;
+        }
+
+        #loginCredentials label, #loginCredentials input[type="text"], #loginCredentials input[type="password"]{
+            margin-left: 140px;
+        }
+        
+        .profile-image-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .profile-image-container img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin-right: 80px;
+            margin-left: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: white;
+            font-size: 21px;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"], select {
+            width: calc(100% - 2px);
+            padding: 5px;
+            margin-bottom: 15px;
+            border: 1px solid white;
+            border-radius: 5px;
+            font-size: 15px;
+            color: #454444;
+        }
+
+        #sportsList {
+            color: white;
+            text-align: left;
+            font-size: 20px;
+            margin-left: 7em;
+        }
+
+        #sportsList button{
+            background-color: #c4001dcc;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        .button-group{
+            margin-left: 10em;
+        }
+
+        #loginCredentials input[type="text"], #loginCredentials input[type="password"] {
+            width: 80%;
+            max-width: 400px;
+            padding: 10px;            
+            margin-bottom: 15px;
+            border: 1px solid white;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        #loginCredentials button {
+            width: auto;
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-left: 280px;
+            font-size: 15px;
+            background-color: #c4001dcc;
+        }
+
+        #loginCredentials button :hover{
+            opacity: 75%;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #888;
+        }
+
+        .exit-btn {
+            background-color: #c4001dcc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .exit-btn:hover {
+            background-color: darkred;
+        }
+
+        .footer {
+            background-color:  #2d2d2d;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            margin-top: 20px;
+        }
+     
+         
+        .footer button {
+            background-color: #c4001dcc;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px; 
+        }    
+            
+        .footer button :hover {
+            opacity: 75%;
+        }
+
+        @media (max-width: 768px) {
+            .navbar .menu a {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .navbar .logo img {
+                width: 40px;
+            }
+
+            .navbar .profile img {
+                width: 35px;
+                margin-right: 30px; /* Adjusted margin for profile image */
+            }
+
+            #personalInfo {
+                padding: 40px;
+                margin-top: 10px;
+            }
+
+            .profile-image-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .profile-image-container img {
+                width: 150px;
+                height: 150px;
+                margin-bottom: 20px;
+            }
+
+            .profile-image-container div {
+                width: 100%;
+                text-align: center;
+            }
+
+            input[type="text"], input[type="email"], select {
+                width: 100%;
+                padding: 10px;
+            }
+
+            label {
+                font-size: 16px;
+            }
+
+            input[type="text"], input[type="email"], select {
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Personal Information Section */
+            #personalInfo {
+                padding: 10px;
+            }
+
+            .profile-image-container img {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 15px;
+            }
+
+            /* Adjust input fields for smaller screens */
+            input[type="text"], input[type="email"], select {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            /* Adjust the overall layout for better readability */
+            .profile-image-container div {
+                text-align: left;
+                margin-top: 10px;
+            }
+
+            label {
+                font-size: 14px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="Images/logo.png" alt="Logo">
+            </a>
+        </div>
+        <div class="menu">
+            <a href="home.html">Home</a>
+            <a href="#news">News</a>
+            <a href="#calendar">Calendar</a>
+            <a href="booking.html">Booking</a>
+        </div>
+        <div class="profile">
+            <a href="profile.html">
+                <img src="Images/profile.png" alt="Profile Image">
+            </a>
+        </div>
+    </div>
+    <div class="header-background">
+        <br>
+        <h1>My Profile</h1>
+    </div>
+
+    <div class="container">
+        <!-- 1. Personal Information Section with Profile Image -->
+        <div class="section" id="personalInfo">
+            <h2>
+                PERSONAL INFORMATION
+            </h2>
+            <div class="profile-image-container">
+                <img src="Images/profile.png" alt="User Profile Image">
+                <div>
+                    <label for="fullName">
+                        Full Name
+                    </label>
+                    <input type="text" id="fullName" placeholder="Full Name" readonly>
+
+                    <label for="companyEmail">
+                        Company Email
+                    </label>
+                    <input type="email" id="companyEmail" placeholder="Company Email" readonly>
+
+                    <label for="securityQuestion">
+                        Security Question
+                    </label>
+                    <select id="securityQuestion">
+                        <option value="pet">
+                            What was the name of your first pet?
+                        </option>
+                        <option value="city">
+                            What city were you born in?
+                        </option>
+                        <option value="school">
+                            What was the name of your primary school?
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Login Credentials Section -->
+        <div class="section" id="loginCredentials">
+            <h2>
+                LOGIN CREDENTIALS
+            </h2>
+            <label for="username">
+                Username
+            </label>
+            <input type="text" id="username" placeholder="Username" readonly>
+
+            <label for="oldPassword">
+                Old Password
+            </label>
+            <input type="password" id="oldPassword" placeholder="Enter Old Password">
+
+            <label for="newPassword">
+                New Password
+            </label>
+            <input type="password" id="newPassword" placeholder="Enter New Password"><br>
+            <button onclick="saveNewPassword()">
+                Save New Password
+            </button>
+        </div>
+
+        <!-- 3. Edit Sport Interests Section -->
+        <div class="section" id="editSportInterests">
+            <h2>
+                EDIT INTERESTS
+            </h2>
+            <div id="sportsList">
+                <div>
+                    <span>
+                        Badminton
+                    </span>
+                    <span class="button-group">
+                        <button onclick="joinGroup('Badminton')">
+                            Join Group
+                        </button>
+                        <button onclick="exitGroup('Badminton')">
+                            Exit Group
+                        </button>
+                    </span>
+                </div>
+                <br>
+                <div>
+                    <span>
+                        Basketball&nbsp;
+                    </span>
+                    <span class="button-group">
+                        <button onclick="joinGroup('Basketball')">
+                            Join Group
+                        </button>
+                        <button onclick="exitGroup('Basketball')">
+                            Exit Group
+                        </button>
+                    </span>
+                </div><br>
+                <div>
+                    <span>
+                        Carrom&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                    <span class="button-group">
+                        <button onclick="joinGroup('Carrom')">
+                            Join Group
+                        </button>
+                        <button onclick="exitGroup('Carrom')">
+                            Exit Group
+                        </button>
+                    </span>
+                </div>
+                <br>
+                <div>
+                    <span>
+                        Checkers &nbsp;&nbsp;
+                    </span>
+                    <span class="button-group">
+                        <button onclick="joinGroup('Checkers')">
+                            Join Group
+                        </button>
+                        <button onclick="exitGroup('Checkers')">
+                            Exit Group
+                        </button>
+                    </span>
+                </div>
+                <br>
+                <div>
+                    <span>
+                        Chess&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                    <span class="button-group">
+                        <button onclick="joinGroup('Chess')">
+                            Join Group
+                        </button>
+                        <button onclick="exitGroup('Chess')">
+                            Exit Group
+                        </button>
+                    </span>
+                </div>
+                <br>
+                <div>
+                    <span>
+                        Netball &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                    <span class="button-group">
+                        <button onclick="joinGroup('Netball')">
+                            Join Group
+                        </button>
+                        <button onclick="exitGroup('Netball')">
+                            Exit Group
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer at the bottom of the page -->
+    <div class="footer">
+        <button>
+            Complaint
+        </button>
+        <button>
+            Requests
+        </button>
+        <button>
+            Feedback
+        </button>
+    </div>
+
+    <script>
+        document.getElementById("fullName").value = "John Doe";
+        document.getElementById("companyEmail").value = "johndoe@company.com";
+        document.getElementById("username").value = "johndoe";
+
+        function saveNewPassword() {
+            const oldPassword = document.getElementById("oldPassword").value;
+            const newPassword = document.getElementById("newPassword").value;
+            if (oldPassword && newPassword) {
+                alert("Password updated successfully!");
+            } else {
+                alert("Please fill in both old and new password fields.");
+            }
+        }
+
+        function joinGroup(sport) {
+            alert(`Joining ${sport} group...`);
+        }
+
+        function exitGroup(sport) {
+            alert(`Exiting ${sport} group...`);
+        }
+    </script>
+
+    </body>
+</html>
